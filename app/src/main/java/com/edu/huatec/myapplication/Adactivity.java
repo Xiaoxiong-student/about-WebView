@@ -1,7 +1,9 @@
 package com.edu.huatec.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
@@ -25,8 +27,36 @@ public class Adactivity extends AppCompatActivity{
         webView=findViewById(R.id.webview1);
         textView=findViewById(R.id.tv1);
 
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Adactivity.this,MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+        });
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=10;i>=0;i--){
+
+                    SystemClock.sleep(1000);
+
+                    final int count=i;
+                    textView.setText("点击跳转"+count);
+
+                }
+            }
+        });
+
+
+
 
         initView();
+
 
     }
 
@@ -50,4 +80,5 @@ public class Adactivity extends AppCompatActivity{
             }
         }); webView.loadUrl(" webView.loadUrl(\"https://www.baidu.com\");");
     }
+
 }
